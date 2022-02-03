@@ -45,9 +45,9 @@ def act_mats_varying_corr_freqs(corruption_freqs):
         act_mats[key] = model.run(adj_mat=graph)
     return act_mats
 
-corruption_freqs = [200, 500, 600, 800]
+corruption_freqs = [100, 200, 300]
 act_mats = act_mats_varying_corr_freqs(corruption_freqs)
 
 for key, act_mat in act_mats.items():
     plot_phase_coherence(act_mat, key)
-    plt.show()
+plt.show()
