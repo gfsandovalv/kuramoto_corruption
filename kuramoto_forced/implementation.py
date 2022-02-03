@@ -5,30 +5,26 @@ from scipy import stats as st
 from modules.kuramoto import Kuramoto
 from modules.plotting import plot_activity, plot_phase_coherence
 
-n_osc = 100
-coupl = 3
+# Parámetros del modelo
 
-## frecuencias naturales usando la distribución de cauchy
-normal_dist = st.norm(loc=100, scale=1)
-natfreqs_sample = normal_dist.rvs(size=n_osc)
+coupl = 3 # Coupling
+dt = 0.1 #
+T=10 # time interval (0, T)
+num_osc = 100 # number of oscillators will serve as size for the samples
 
-#natfreqs_sample = [1,2,5,100]
-labeldict = {i:e for i, e in enumerate(np.floor(natfreqs_sample))}
+honesty_freq = 100
+corruption_freq = 600
+forcing_amp = 0.1
 
-graph_nx = nx.erdos_renyi_graph(n=n_osc, p=1) # p=1 -> all-to-all connectivity
+# Implementation
+
+## initialize distributions
+honesty_normal_dist = st.norm(loc=honesty_freq, scale=1) ## centered at 100 and standar deviation 1
+honesty_natfreqs_sample = honesty_normal_dist.rvs(size=num_osc) ## sample of size = num_osc
+
+## create graph
+graph_nx = nx.erdos_renyi_graph(n=num_osc, p=1) # p=1 -> all-to-all connectivity
 graph = nx.to_numpy_array(graph_nx)
 #nx.draw(graph_nx, labels=labeldict, with_labels = True)
 
-
-model = Kuramoto(coupling=coupl, dt=0.1, T=10, 
-                 natfreqs=natfreqs_sample, forcing_amp=1, forcing_freq=50) 
-act_mat = model.run(adj_mat=graph)
-
-
-a = model.mean_frequency(act_mat, graph)
-fig, ax = plt.subplots()
-ax.hist(a, bins=5, rwidth=0.9)
-
-
-#plot_phase_coherence(act_mat)
-plt.show()
+model.
