@@ -31,16 +31,16 @@ def plot_phase_coherence(activity, title=None):
     """
     if title is not None:
         title = str(title)
-        _, ax = plt.subplots(figsize=(8, 3))
+        fig, ax = plt.subplots(figsize=(8, 4))
         ax.plot([Kuramoto.phase_coherence(vec) for vec in activity.T], 'o')
         ax.set_ylabel('Order parameter', fontsize=20)
         ax.set_xlabel('Time', fontsize=20)
         ax.set_ylim((-0.01, 1))
         ax.set_title(title)
     else:
-        _, ax = plt.subplots(figsize=(8, 3))
+        fig, ax = plt.subplots(figsize=(8, 4))
         ax.plot([Kuramoto.phase_coherence(vec) for vec in activity.T], 'o')
         ax.set_ylabel('Order parameter', fontsize=20)
         ax.set_xlabel('Time', fontsize=20)
         ax.set_ylim((-0.01, 1))
-    return ax
+    return fig, ax
