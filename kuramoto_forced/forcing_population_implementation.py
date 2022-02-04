@@ -6,7 +6,7 @@ from modules.kuramoto import Kuramoto
 from modules.plotting import plot_activity, plot_phase_coherence
 
 # Parámetros del modelo
-coupl = 2.5 # Coupling
+coupl = 3.5 # Coupling
 dt = 0.1 #
 T=10 # time interval (0, T)
 
