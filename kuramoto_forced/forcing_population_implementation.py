@@ -31,7 +31,7 @@ ax.hist(pop_natfreqs_sample, bins=int(population/10), rwidth=0.8, density=True);
 ax.set_title('Población')
 
 
-initial_population_fig.savefig('figs/initial_pop.png')
+initial_population_fig.savefig('figs/forced_pop_initial_pop.png')
 plt.close(initial_population_fig)
 
 ## create graph
@@ -39,10 +39,21 @@ graph_nx = nx.erdos_renyi_graph(n=population, p=1) # p=1 -> all-to-all connectiv
 graph = nx.to_numpy_array(graph_nx)
 
 ## intialization of model as Kuramoto Class and runing it over the graph
-model = Kuramoto(coupling=coupl, dt=dt, T=T, natfreqs=pop_freqs)
+model = Kuramoto(coupling=coupl, dt=dt, T=T, 
+                 natfreqs=pop_natfreqs_sample, forcing_amp=forcing_amp, forcing_freq=corruption_freq)
 act_mat = model.run(adj_mat=graph)
 
 ## plot of order parameter
 order_parameter_fig, ax = plot_phase_coherence(act_mat)
-order_parameter_fig.savefig('figs/order_parameter_mixed_pop.png')
+order_parameter_fig.savefig('figs/forced_pop_order_parameter.png')
 plt.close(order_parameter_fig)
+
+## mean frequencies over all timespan
+mean_frequencies = model.mean_frequency(act_mat=act_mat, adj_mat=graph)
+
+### plot
+mean_frequencies_fig, ax = plt.subplots()
+ax.hist(mean_frequencies, bins=10, rwidth=0.8, density=True)
+ax.set_title('Histograma de las frecuencias medias')
+mean_frequencies_fig.savefig('figs/forced_pop_mean_freqs.png')
+plt.close(mean_frequencies_fig)

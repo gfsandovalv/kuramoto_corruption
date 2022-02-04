@@ -36,7 +36,7 @@ pop_freqs = np.concatenate((honesty_natfreqs_sample, corruption_natfreqs_sample)
 
 ## plots of the samples histograms and distributions pdfs
 
-## initialize figures
+### initialize figures
 initial_population_fig, ax = plt.subplots(1, 2)
 
 x = np.linspace(honesty_normal_dist.ppf(0.01), honesty_normal_dist.ppf(0.99), 100)
@@ -65,3 +65,15 @@ act_mat = model.run(adj_mat=graph)
 order_parameter_fig, ax = plot_phase_coherence(act_mat)
 order_parameter_fig.savefig('figs/mixed_pop_order_parameter.png')
 plt.close(order_parameter_fig)
+
+## mean frequencies over all timespan
+mean_frequencies = model.mean_frequency(act_mat=act_mat, adj_mat=graph)
+
+### plot
+mean_frequencies_fig, ax = plt.subplots()
+ax.hist(mean_frequencies, bins=10, rwidth=0.8, density=True)
+ax.set_title('Histograma de las frecuencias medias')
+mean_frequencies_fig.savefig('figs/mixed_pop_mean_freqs.png')
+plt.close(mean_frequencies_fig)
+
+
