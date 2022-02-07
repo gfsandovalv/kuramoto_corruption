@@ -47,7 +47,7 @@ model = Kuramoto(coupling=coupl, dt=dt, T=T,
 act_mat = model.run(adj_mat=graph)
 
 ## plot of order parameter
-order_parameter_fig, ax = plot_phase_coherence(act_mat)
+order_parameter_fig, ax = plot_phase_coherence(act_mat, title='Parámetro de orden de la red forzada de osciladores')
 order_parameter_fig.savefig('figs/forced_pop_order_parameter.png')
 plt.close(order_parameter_fig)
 
