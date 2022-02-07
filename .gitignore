@@ -1,3 +1,4 @@
 kuramoto_forced/.vscode/
 __pycache__
 *.pyc
+kuramoto_forced/modules/__pycache__
