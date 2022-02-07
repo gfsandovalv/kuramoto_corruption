@@ -33,14 +33,14 @@ def plot_phase_coherence(activity, title=None):
         title = str(title)
         fig, ax = plt.subplots(figsize=(8, 4))
         ax.plot([Kuramoto.phase_coherence(vec) for vec in activity.T], 'o')
-        ax.set_ylabel('Order parameter', fontsize=20)
-        ax.set_xlabel('Time', fontsize=20)
+        ax.set_ylabel('Parámetro de orden')
+        ax.set_xlabel('Tiempo')
         ax.set_ylim((-0.01, 1))
         ax.set_title(title)
     else:
         fig, ax = plt.subplots(figsize=(8, 4))
         ax.plot([Kuramoto.phase_coherence(vec) for vec in activity.T], 'o')
-        ax.set_ylabel('Order parameter', fontsize=20)
-        ax.set_xlabel('Time', fontsize=20)
+        ax.set_ylabel('Parámetro de orden')
+        ax.set_xlabel('Tiempo')
         ax.set_ylim((-0.01, 1))
     return fig, ax

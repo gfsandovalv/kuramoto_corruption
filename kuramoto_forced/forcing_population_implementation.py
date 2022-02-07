@@ -20,6 +20,7 @@ forcing_amp = 0.1
 ## initialize distributions
 ### distribution of the population frequencies cetered at honesty_freq
 population_normal_dist = st.norm(loc=honesty_freq, scale=2) ## centered at 100 and standar deviation 2
+np.random.seed(seed=346533)
 pop_natfreqs_sample = population_normal_dist.rvs(size=population) 
 
 ## plots of the samples histograms and distributions pdfs
@@ -29,6 +30,8 @@ x = np.linspace(population_normal_dist.ppf(0.01), population_normal_dist.ppf(0.9
 ax.plot(x, population_normal_dist.pdf(x), 'k-', lw=2, label='frozen pdf'); # pdf
 ax.hist(pop_natfreqs_sample, bins=int(population/10), rwidth=0.8, density=True); # histogram of the sample
 ax.set_title('Población')
+ax.set_xlabel(r'Frecuencia promedio ($\omega$)')
+ax.set_ylabel('Densidad de ocurrencias')
 
 
 initial_population_fig.savefig('figs/forced_pop_initial_pop.png')
@@ -55,5 +58,7 @@ mean_frequencies = model.mean_frequency(act_mat=act_mat, adj_mat=graph)
 mean_frequencies_fig, ax = plt.subplots()
 ax.hist(mean_frequencies, bins=10, rwidth=0.8, density=True)
 ax.set_title('Histograma de las frecuencias medias')
+ax.set_xlabel(r'Frecuencia ($\omega$)')
+ax.set_ylabel(r'Densidad de ocurrencia')
 mean_frequencies_fig.savefig('figs/forced_pop_mean_freqs.png')
 plt.close(mean_frequencies_fig)
